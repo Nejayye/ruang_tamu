@@ -2,7 +2,7 @@ import { Router } from "express";
 
 const contactRouter = Router();
 
-contactRouter.post("/contact", async (req, res) => {
+contactRouter.post("/contact", async (req: any, res: any) => {
   const { name, message } = req.body as { name?: string; message?: string };
 
   if (!name?.trim() || !message?.trim()) {
@@ -12,7 +12,7 @@ contactRouter.post("/contact", async (req, res) => {
 
   const webhookUrl = process.env["DISCORD_WEBHOOK_URL"];
   if (!webhookUrl) {
-    req.log.error("DISCORD_WEBHOOK env var is not set");
+    req.log?.error("DISCORD_WEBHOOK env var is not set");
     res.status(500).json({ error: "Webhook not configured." });
     return;
   }
@@ -21,7 +21,7 @@ contactRouter.post("/contact", async (req, res) => {
   const avatarUrl = domain ? `https://${domain}/gif4.gif` : "https://i.imgur.com/4M34hi2.png";
 
   const payload = {
-    username: "Ren",
+    username: "kidu",
     avatar_url: avatarUrl,
     embeds: [
       {
@@ -31,26 +31,30 @@ contactRouter.post("/contact", async (req, res) => {
           { name: "From", value: name, inline: true },
           { name: "Message", value: message },
         ],
-        footer: { text: "Sent Via Tourist Message" },
+        footer: { text: "Sent via Tourist Message" },
         timestamp: new Date().toISOString(),
       },
     ],
   };
 
-  const discordRes = await fetch(webhookUrl, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
+  try {
+    const discordRes: any = await fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
-  if (!discordRes.ok) {
-    const text = await discordRes.text();
-    req.log.error({ status: discordRes.status, body: text }, "Discord webhook failed");
-    res.status(502).json({ error: "Discord delivery failed." });
-    return;
+    if (!discordRes.ok) {
+      const errText = await discordRes.text();
+      req.log?.error({ status: discordRes.status, error: errText }, "Discord webhook failed");
+      res.status(500).json({ error: "Failed to send message to Discord." });
+      return;
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: "Internal server error." });
   }
-
-  res.json({ ok: true });
 });
 
 export default contactRouter;
