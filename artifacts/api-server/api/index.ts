@@ -6,16 +6,14 @@ const app: Express = express();
 app.use(cors());
 app.use(express.json());
 
-// Rute Utama / Health Check
-app.get("/", (req, res) => {
+app.get("/", (req: any, res: any) => {
   res.json({ message: "API Server Active" });
 });
 
-app.get("/health", (req, res) => {
+app.get("/health", (req: any, res: any) => {
   res.json({ status: "ok" });
 });
 
-// Rute Discord Contact
 app.post("/contact", async (req: any, res: any) => {
   const { name, message } = req.body as { name?: string; message?: string };
 
