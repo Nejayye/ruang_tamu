@@ -28,10 +28,10 @@ app.post("/contact", async (req, res) => {
   }
 
   const payload = {
-    username: "Ren",
+    username: "kidu",
     embeds: [
       {
-        title: "📩 New Calling Card",
+        title: "📩 New Hate Message",
         color: 0xcc00cc,
         fields: [
           { name: "From", value: name, inline: true },
