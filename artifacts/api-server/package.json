@@ -1,10 +1,10 @@
 {
-  "name": "api-server",
-  "version": "1.0.0",
+  "name": "@workspace/api-server",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "echo build skipped for vercel",
-    "start": "node dist/index.mjs"
+    "build": "echo build skipped",
+    "start": "node api/index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
