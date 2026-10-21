@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Personal Site"
+version = "1.0.0"
+id = "artifacts/persona-site"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25346
+
+[services.development]
+run = "pnpm --filter @workspace/persona-site run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/persona-site", "run", "build" ]
+publicDir = "artifacts/persona-site/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25346"
+BASE_PATH = "/"
