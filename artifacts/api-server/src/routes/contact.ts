@@ -12,7 +12,7 @@ contactRouter.post("/contact", async (req: any, res: any) => {
 
   const webhookUrl = process.env["DISCORD_WEBHOOK_URL"];
   if (!webhookUrl) {
-    req.log?.error("DISCORD_WEBHOOK env var is not set");
+    console.error("DISCORD_WEBHOOK env var is not set");
     res.status(500).json({ error: "Webhook not configured." });
     return;
   }
@@ -46,13 +46,14 @@ contactRouter.post("/contact", async (req: any, res: any) => {
 
     if (!discordRes.ok) {
       const errText = await discordRes.text();
-      req.log?.error({ status: discordRes.status, error: errText }, "Discord webhook failed");
+      console.error({ status: discordRes.status, error: errText }, "Discord webhook failed");
       res.status(500).json({ error: "Failed to send message to Discord." });
       return;
     }
 
     res.json({ success: true });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: "Internal server error." });
   }
 });

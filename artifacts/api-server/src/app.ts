@@ -1,34 +1,18 @@
 import express, { type Express } from "express";
 import cors from "cors";
 import router from "./routes/index";
-import { logger } from "./lib/logger";
-
-const pinoHttp = require("pino-http");
 
 const app: Express = express();
 
-app.use(
-  pinoHttp({
-    logger,
-    serializers: {
-      req(req: any) {
-        return {
-          id: req.id,
-          method: req.method,
-          url: req.url?.split("?")[0],
-        };
-      },
-      res(res: any) {
-        return {
-          statusCode: res.statusCode,
-        };
-      },
-    },
-  })
-);
-
 app.use(cors());
 app.use(express.json());
+
+// Logger sederhana tanpa modul pino yang memicu error Vercel
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
+
 app.use(router);
 
 export default app;
