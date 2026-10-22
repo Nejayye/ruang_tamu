@@ -38,7 +38,7 @@ const TRANSLATIONS: Record<Lang, {
   cfgResetBtn: string;
 }> = {
   EN: {
-    menu: ["Introduction", "wat im fw", "Social", "About", "Contact", "Config"],
+    menu: ["door", "wat im fw", "my media", "dis me", "for sending hate", "Config"],
     menuLabel: "Menu",
     welcome: "Welcome",
     heroTitle: ["twin and", "folk"],
@@ -50,7 +50,7 @@ const TRANSLATIONS: Record<Lang, {
     contactTitle: "sending hate",
     contactNameLabel: "From", contactNamePlaceholder: "put yo name here",
     contactMsgLabel: "Message", contactMsgPlaceholder: "whatcu tryna say",
-    contactBtn: "Dispatch",
+    contactBtn: "Throwin",
     sectionConfig: "System Config",
     cfgBgNoise: "Background Noise", cfgBgNoiseDesc: "Enable CRT scanline and static effects",
     cfgAnim: "Battle Animations", cfgAnimDesc: "Enable heavy UI transitions",
@@ -331,11 +331,11 @@ export default function Home() {
 
   useEffect(() => {
     const ACHIEVEMENTS: Record<string, { rank: number; title: string; msg: string }> = {
-      "game-info": { rank: 2, title: "TS WHAT I LOVE",        msg: "TUFF OR NAH." },
-      "social":    { rank: 3, title: "CONNECTIONS FOUND",     msg: "lets moots tho." },
-      "about":     { rank: 4, title: "TS ME GNG ONG",         msg: "WHO DIS GUY ." },
-      "contact":   { rank: 5, title: "SENDING HATE",          msg: "why u bulleh meh." },
-      "config":    { rank: 6, title: "SYSTEM INFILTRATED",    msg: "YESSIR YESSIR." },
+      "what im fw": { rank: 2, title: "TS WHAT I LOVE",        msg: "TUFF OR NAH." },
+      "my media":    { rank: 3, title: "CONNECTIONS FOUND",    msg: "lets moots tho." },
+      "dis me":     { rank: 4, title: "TS ME GNG ONG",         msg: "WHO DIS GUY ." },
+      "for sending hate":   { rank: 5, title: "SENDING HATE",  msg: "why u bulleh meh." },
+      "config":    { rank: 6, title: "DOOMSCROLLED",           msg: "YESSIR YESSIR." },
     };
     if (activeItem && ACHIEVEMENTS[activeItem] && !shownAchievementsRef.current.has(activeItem)) {
       shownAchievementsRef.current.add(activeItem);
@@ -357,9 +357,9 @@ export default function Home() {
     const LABELS: Record<string, string> = {
       intro:       "insert tittle",
       "game-info": "wat im fw",
-      social:      "Social",
-      about:       "Me btw",
-      contact:     "send domth",
+      social:      "my media",
+      about:       "dis me",
+      contact:     "for sending hate",
       config:      "Config",
     };
     const label = LABELS[activeItem] ?? activeItem;
