@@ -6,15 +6,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
+app.get(["/", "/api"], (req, res) => {
   res.json({ message: "API Server Active" });
 });
 
-app.get("/health", (req, res) => {
+app.get(["/health", "/api/health"], (req, res) => {
   res.json({ status: "ok" });
 });
 
-app.post("/contact", async (req, res) => {
+app.post(["/contact", "/api/contact"], async (req, res) => {
   const { name, message } = req.body || {};
 
   if (!name || !name.trim() || !message || !message.trim()) {
@@ -23,15 +23,15 @@ app.post("/contact", async (req, res) => {
 
   const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
   if (!webhookUrl) {
-    console.error("DISCORD_WEBHOOK env var is not set");
+    console.error("DISCORD_WEBHOOK_URL environment variable is not set");
     return res.status(500).json({ error: "Webhook not configured." });
   }
 
   const payload = {
-    username: "kidu",
+    username: "Ren",
     embeds: [
       {
-        title: "📩 New Hate Message",
+        title: "📩 New Calling Card",
         color: 0xcc00cc,
         fields: [
           { name: "From", value: name, inline: true },
