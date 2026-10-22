@@ -282,7 +282,7 @@ export default function Home() {
     playSound("/dispatch.mp3");
     setSendStatus("sending");
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("https://ruang-tamu-snsw.vercel.app/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: contactName, message: contactMsg }),
@@ -331,11 +331,11 @@ export default function Home() {
 
   useEffect(() => {
     const ACHIEVEMENTS: Record<string, { rank: number; title: string; msg: string }> = {
-      "game-info": { rank: 2, title: "PLAYER DATA ACCESSED",  msg: "Battle stats have been revealed." },
-      "social":    { rank: 3, title: "CONNECTIONS FOUND",     msg: "All social links are now available." },
-      "about":     { rank: 4, title: "TRUE NATURE REVEALED",  msg: "The Tourist's identity is known." },
-      "contact":   { rank: 5, title: "CALLING CARD READY",    msg: "A message can now be sent." },
-      "config":    { rank: 6, title: "SYSTEM INFILTRATED",    msg: "All parameters are under control." },
+      "game-info": { rank: 2, title: "TS WHAT I LOVE",        msg: "TUFF OR NAH." },
+      "social":    { rank: 3, title: "CONNECTIONS FOUND",     msg: "lets moots tho." },
+      "about":     { rank: 4, title: "TS ME GNG ONG",         msg: "WHO DIS GUY ." },
+      "contact":   { rank: 5, title: "SENDING HATE",          msg: "why u bulleh meh." },
+      "config":    { rank: 6, title: "SYSTEM INFILTRATED",    msg: "YESSIR YESSIR." },
     };
     if (activeItem && ACHIEVEMENTS[activeItem] && !shownAchievementsRef.current.has(activeItem)) {
       shownAchievementsRef.current.add(activeItem);
@@ -355,11 +355,11 @@ export default function Home() {
   useEffect(() => {
     if (!activeItem) return;
     const LABELS: Record<string, string> = {
-      intro:       "Introduction",
+      intro:       "insert tittle",
       "game-info": "wat im fw",
       social:      "Social",
-      about:       "About",
-      contact:     "Contact",
+      about:       "Me btw",
+      contact:     "send domth",
       config:      "Config",
     };
     const label = LABELS[activeItem] ?? activeItem;
