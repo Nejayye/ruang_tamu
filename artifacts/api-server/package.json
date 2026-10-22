@@ -1,4 +1,4 @@
-{
+{{
   "name": "@workspace/api-server",
   "version": "0.0.0",
   "private": true,
@@ -9,5 +9,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0"
   }
 }
